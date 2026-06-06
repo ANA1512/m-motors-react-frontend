@@ -8,6 +8,12 @@ Interface React pour la plateforme de vente et location de véhicules M-Motors.
 - Vite
 - Bootstrap
 
+## Actuel
+✅ React router
+✅Login/register
+✅ LocalStorage 
+✅Communistation API FLask
+
 ## Installation
 
 ```bash
@@ -27,4 +33,12 @@ L'application tourne sur `http://localhost:5173`
 ## Prérequis
 
 Le backend doit tourner sur `http://localhost:5001`
+
+## Architecture globale
+
+Frontend React
+↓
+API Flask
+↓
+PostgreSQL
 
