@@ -41,4 +41,3 @@ Frontend React
 API Flask
 ↓
 PostgreSQL
-
