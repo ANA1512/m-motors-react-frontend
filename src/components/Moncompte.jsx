@@ -21,9 +21,9 @@ function Moncompte() {
         getAllClientFiles.map(files =>(
 
             <li key = {files.id}>
-                {files.type_financement}
-                {files.revenu_mensuel}
-                {files.statut}
+                <strong>type :</strong> {files.type_financement} |
+                <strong>revenu :</strong> {files.revenu_mensuel} |
+                <strong>Statut :</strong> {files.statut}
             </li>
 
         ))

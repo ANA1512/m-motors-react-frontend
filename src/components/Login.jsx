@@ -25,10 +25,19 @@ const handleSubmit = async (e) => {
 
     if(response.ok){
         localStorage.setItem('token', data.token)
+        
+        const meResponse = await fetch("http://127.0.0.1:5001/me", {
+        headers: { "Authorization": `Bearer ${data.token}` }
+    })
+    const meData = await meResponse.json()
+    localStorage.setItem('role', meData.role)
+    
+    if(meData.role === "admin"){
+        navigate('/admin')
+    } else {
         navigate('/')
+    }
 
-    }else{
-       setErrorMessage(data.message) 
     }
 }
 

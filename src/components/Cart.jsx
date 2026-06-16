@@ -41,7 +41,7 @@ function Cart() {
             
             <form>
            <input 
-                type="text" 
+                type="number" 
                 value={revenuMensuel}
                 onChange={(e) => setRevenuMensuel(e.target.value)} 
            />
