@@ -1,6 +1,8 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 
 function Navbar() {
+    const token = localStorage.getItem("token")
+
   return (
     <div>
         <nav className="navbar navbar-expand-lg bg-light">
@@ -16,16 +18,48 @@ function Navbar() {
             Nos véhicules
             </a>
         <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Ventes</a></li>
-            <li><a className="dropdown-item" href="#">Location</a></li>
+            <li>
+                <Link className="dropdown-item" to="/">
+                 Ventes
+                </Link>
+            </li>
+            <li>
+                <Link className="dropdown-item" to="/">
+                Location
+                </Link>
+            </li>
         </ul>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="#">Mon compte</a>
+        {localStorage.getItem("token") ? (
+        <>
+                <Link className="nav-link" to="/moncompte">
+                Mon compte
+                </Link>
+
+                <button
+                className="btn btn-outline-danger"
+                onClick={() => {
+                    localStorage.removeItem("token")
+                    localStorage.removeItem("role")
+                    window.location.href = "/"
+                }}
+                >
+                Déconnexion
+                </button>
+            </>
+            ) : (
+            <Link className="nav-link" to="/login">
+                Connexion
+            </Link>
+            )}
+                   
         </li>
         </ul>
         
         </div>
+
+ 
     </div>
     </nav>
     </div>

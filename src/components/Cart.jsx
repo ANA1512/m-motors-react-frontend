@@ -6,10 +6,18 @@ function Cart() {
 
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("data")) || [])
     console.log("cart:", cart)
-    const[revenuMensuel, setRevenuMensuel] = useState('')
+   
     
-  const handleCreateFiles = (e, vehicule) => {
+    const handleCreateFiles = async (e,vehicule) => {
     e.preventDefault()
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+    localStorage.setItem("waitForVehicle", JSON.stringify(vehicule))
+    window.location.href = "/login"
+    return
+    }
+
 
     const sendDataFiles = {
         method: 'POST',
@@ -20,15 +28,17 @@ function Cart() {
         body: JSON.stringify({
             vehicule_id: vehicule.id,
             type_financement: vehicule.type,
-            revenu_mensuel: parseInt(revenuMensuel),
-            statut: 'en attente'
+            statut: 'à complèter'
         })
     }
 
     fetch('http://127.0.0.1:5001/dossier', sendDataFiles)
         .then(response => response.json())
-        .then(data => alert('Dossier envoyé et en cours d\'examen'))
-}
+        .then(data => {
+         alert('Dossier crée. Complèter votre demande sur votre compte')
+         window.location.href = "/moncompte"
+        })
+  }
   
 
   return (
@@ -39,12 +49,8 @@ function Cart() {
             {vehicule.type} -
             {vehicule.price} -
             
-            <form>
-           <input 
-                type="number" 
-                value={revenuMensuel}
-                onChange={(e) => setRevenuMensuel(e.target.value)} 
-           />
+          <form>
+            
           <input 
             onClick={(e) => handleCreateFiles(e, vehicule)}
             type="submit"
@@ -56,5 +62,6 @@ function Cart() {
     </div>
   )
 }
+
 
 export default Cart

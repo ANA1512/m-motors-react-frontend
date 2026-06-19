@@ -57,6 +57,7 @@ function AdminDashBoard() {
                             <td>{d.vehicule_id}</td>
                             <td>{d.type_financement}</td>
                             <td>{d.revenu_mensuel}</td>
+                           
                             <td>
                                 <select 
                                     value={d.statut} 
@@ -67,6 +68,7 @@ function AdminDashBoard() {
                                     <option value="refusé">refusé</option>
                                 </select>
                             </td>
+                             <td>{d.document}</td>
                         </tr>
                     ))}
                 </tbody>

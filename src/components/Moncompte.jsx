@@ -14,8 +14,17 @@ function Moncompte() {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         })
-        .then(response => response.json())
-        .then(data => setgetAllClientFiles(data))
+        .then(response => {
+      if (!response.ok) {
+        throw new Error("Non autorisé")
+      }
+        return response.json()
+      })
+      .then(data => setgetAllClientFiles(data))
+      .catch(error => {
+        console.log(error)
+        setgetAllClientFiles([])
+      })
     }, [])
       
 
@@ -39,7 +48,7 @@ function Moncompte() {
   return (
     <div>
       {
-        getAllClientFiles.map(files =>(
+        Array.isArray(getAllClientFiles) && getAllClientFiles.map(files =>(
 
             <li key = {files.id}>
                  <p>id : {files.id}</p>
