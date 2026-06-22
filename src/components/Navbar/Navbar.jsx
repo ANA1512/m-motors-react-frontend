@@ -1,69 +1,47 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Navbar() {
-    const token = localStorage.getItem("token")
+  const [token, setToken] = useState(localStorage.getItem("token"))
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setToken(localStorage.getItem("token"))
+    }, 500)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div>
-        <nav className="navbar navbar-expand-lg bg-light">
+      <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-            <a className="navbar-brand" href="#">M-Motors</a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <Link className="navbar-brand" to="/">M-Motors</Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
             <span className="navbar-toggler-icon"></span>
-            </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul className="navbar-nav ms-auto">
-        <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Nos véhicules
-            </a>
-        <ul className="dropdown-menu">
-            <li>
-                <Link className="dropdown-item" to="/">
-                 Ventes
-                </Link>
-            </li>
-            <li>
-                <Link className="dropdown-item" to="/">
-                Location
-                </Link>
-            </li>
-        </ul>
-        </li>
-        <li className="nav-item">
-        {localStorage.getItem("token") ? (
-        <>
-                <Link className="nav-link" to="/moncompte">
-                Mon compte
-                </Link>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul className="navbar-nav ms-auto">
 
-                <button
-                className="btn btn-outline-danger"
-                onClick={() => {
-                    localStorage.removeItem("token")
-                    localStorage.removeItem("role")
-                    window.location.href = "/"
-                }}
-                >
-                Déconnexion
-                </button>
-            </>
-            ) : (
-            <Link className="nav-link" to="/login">
-                Connexion
-            </Link>
-            )}
-                   
-        </li>
-        </ul>
-        
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Nos véhicules</Link>
+              </li>
+
+              <li className="nav-item">
+                {token ? (
+                  <Link className="nav-link fw-bold" style={{ color: "green" }} to="/moncompte">
+                    ● Connecté
+                  </Link>
+                ) : (
+                  <Link className="nav-link" to="/login">Connexion</Link>
+                )}
+              </li>
+
+            </ul>
+          </div>
         </div>
-
- 
+      </nav>
     </div>
-    </nav>
-    </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
