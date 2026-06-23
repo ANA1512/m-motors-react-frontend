@@ -13,7 +13,7 @@ function Register() {
 
     if (!userEmail || !userPassword) return
 
-    const response = await fetch("http://localhost:5001/register", {
+    const response = await fetch("https://m-motors-flask-backend.onrender.com/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: userName, email: userEmail, password: userPassword })
@@ -22,7 +22,6 @@ function Register() {
     const data = await response.json()
 
     if (response.ok) {
-      localStorage.setItem('token', data.token)
       navigate('/login')
     } else {
       setErrorMessage(data.message || "Erreur lors de l'inscription")

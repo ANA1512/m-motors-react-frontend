@@ -6,7 +6,7 @@ function DocumentsList({ dossierId }) {
 
   const fetchDocuments = () => {
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:5001/dossiers/${dossierId}/documents`, {
+    fetch(`https://m-motors-flask-backend.onrender.com/dossiers/${dossierId}/documents`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -20,7 +20,7 @@ function DocumentsList({ dossierId }) {
 
   const deleteDocument = (docId) => {
     if (!window.confirm("Supprimer ce document ?")) return
-    fetch(`http://localhost:5001/document/${docId}`, {
+    fetch(`https://m-motors-flask-backend.onrender.com/document/${docId}`, {
       method: "DELETE",
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     })

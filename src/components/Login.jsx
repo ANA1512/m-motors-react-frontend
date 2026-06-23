@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault()
     if (!userEmail || !userPassword) return
 
-    const response = await fetch("http://localhost:5001/login", {
+    const response = await fetch("https://m-motors-flask-backend.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: userEmail, password: userPassword })
@@ -32,7 +32,7 @@ function Login() {
       if (waitForVehicule) {
         const vehicule = JSON.parse(waitForVehicule)
 
-        await fetch("http://localhost:5001/dossier", {
+        await fetch("https://m-motors-flask-backend.onrender.com/dossier", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function Login() {
         return
       }
 
-      const meResponse = await fetch("http://localhost:5001/me", {
+      const meResponse = await fetch("https://m-motors-flask-backend.onrender.com/me", {
         headers: { "Authorization": `Bearer ${data.token}` }
       })
       const meData = await meResponse.json()

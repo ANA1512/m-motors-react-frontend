@@ -7,7 +7,7 @@ function AdminDashBoard() {
   const token = localStorage.getItem('token')
 
   const fetchDossiers = () => {
-    fetch("http://localhost:5001/admin/dossier", {
+    fetch("https://m-motors-flask-backend.onrender.com/admin/dossier", {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -17,7 +17,7 @@ function AdminDashBoard() {
   useEffect(() => {
     fetchDossiers()
 
-    fetch("http://localhost:5001/me", {
+    fetch("https://m-motors-flask-backend.onrender.com/me", {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -25,7 +25,7 @@ function AdminDashBoard() {
   }, [])
 
   const updateStatut = (id, newStatut) => {
-    fetch(`http://localhost:5001/dossier/${id}`, {
+    fetch(`https://m-motors-flask-backend.onrender.com/dossier/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function AdminDashBoard() {
 
   const deleteDossier = (id) => {
     if (!window.confirm("Supprimer ce dossier définitivement ?")) return
-    fetch(`http://localhost:5001/dossier/${id}`, {
+    fetch(`https://m-motors-flask-backend.onrender.com/dossier/${id}`, {
       method: "DELETE",
       headers: { "Authorization": `Bearer ${token}` }
     })

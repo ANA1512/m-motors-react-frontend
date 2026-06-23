@@ -46,7 +46,7 @@ function Cart() {
       })
     }
 
-    fetch('http://localhost:5001/dossier', sendDataFiles)
+    fetch('https://m-motors-flask-backend.onrender.com/dossier', sendDataFiles)
       .then(response => response.json())
       .then(() => {
         alert('Dossier créé. Compléter votre demande sur votre compte')

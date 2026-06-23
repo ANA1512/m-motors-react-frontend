@@ -8,7 +8,7 @@ function Moncompte() {
   const [revenuMensuel, setRevenuMensuel] = useState({})
 
   const fetchDossiers = () => {
-    fetch("http://localhost:5001/dossier", {
+    fetch("https://m-motors-flask-backend.onrender.com/dossier", {
       method: "GET",
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     })
@@ -25,7 +25,7 @@ function Moncompte() {
 
   useEffect(() => {
     fetchDossiers()
-    fetch("http://localhost:5001/me", {
+    fetch("https://m-motors-flask-backend.onrender.com/me", {
       method: "GET",
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     })
@@ -40,14 +40,14 @@ function Moncompte() {
       formData.append("file", file)
       formData.append("dossier_id", dossierId)
       formData.append("doc_type", docType)
-      fetch("http://localhost:5001/document", {
+      fetch("https://m-motors-flask-backend.onrender.com/document", {
         method: "POST",
         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         body: formData
       }).then(res => res.json())
     }
 
-    fetch(`http://localhost:5001/dossier/${dossierId}`, {
+    fetch(`https://m-motors-flask-backend.onrender.com/dossier/${dossierId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function Moncompte() {
     formData.append("dossier_id", dossierId)
     formData.append("doc_type", docType)
 
-    fetch("http://localhost:5001/document", {
+    fetch("https://m-motors-flask-backend.onrender.com/document", {
       method: "POST",
       headers: { Authorization: "Bearer " + localStorage.getItem("token") },
       body: formData
@@ -89,7 +89,7 @@ function Moncompte() {
 
   const deleteDossier = (dossierId) => {
     if (!window.confirm("Supprimer ce dossier définitivement ?")) return
-    fetch(`http://localhost:5001/dossier/${dossierId}`, {
+    fetch(`https://m-motors-flask-backend.onrender.com/dossier/${dossierId}`, {
       method: "DELETE",
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     })
@@ -103,7 +103,7 @@ function Moncompte() {
 
   const deleteDocument = (docId) => {
     if (!window.confirm("Supprimer ce document ?")) return
-    fetch(`http://localhost:5001/document/${docId}`, {
+    fetch(`https://m-motors-flask-backend.onrender.com/document/${docId}`, {
       method: "DELETE",
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     })
