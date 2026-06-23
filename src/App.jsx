@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState,useEffect} from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Filter from './components/Filter'
@@ -15,6 +15,12 @@ import './App.css'
 function App() {
 
   const [search, setSearch] = useState('')
+
+  useEffect(() => {
+  if (!localStorage.getItem("token")) {
+    localStorage.removeItem("data")
+  }
+}, [])
 
   return (
     <div className='container mt-4'>

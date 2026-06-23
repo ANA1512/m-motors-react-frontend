@@ -101,6 +101,16 @@ function Moncompte() {
       .catch(err => console.log(err))
   }
 
+  const deleteDocument = (docId) => {
+    if (!window.confirm("Supprimer ce document ?")) return
+    fetch(`http://localhost:5001/document/${docId}`, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+    })
+      .then(res => res.json())
+      .then(() => fetchDossiers())
+  }
+
   const badgeStatut = (statut) => {
     if (statut === "validé") return <span className="badge bg-success">validé</span>
     if (statut === "refusé") return <span className="badge bg-danger">refusé</span>
@@ -112,7 +122,6 @@ function Moncompte() {
   return (
     <div className="container mt-4">
 
-      {/* ENCART PROFIL */}
       {user && (
         <div className="card mb-4">
           <div className="card-body d-flex justify-content-between align-items-center">
@@ -128,6 +137,7 @@ function Moncompte() {
               onClick={() => {
                 localStorage.removeItem("token")
                 localStorage.removeItem("role")
+                localStorage.removeItem("data")
                 window.location.href = "/"
               }}
             >
@@ -158,9 +168,16 @@ function Moncompte() {
               <td>
                 {files.documents && files.documents.length > 0
                   ? files.documents.map(doc => (
-                    <span key={doc.id} className="badge bg-light text-dark me-1 d-block mb-1">
-                      {doc.doc_type}
-                    </span>
+                    <div key={doc.id} className="d-flex align-items-center gap-1 mb-1">
+                      <span className="badge bg-light text-dark">{doc.doc_type}</span>
+                      <button
+                        className="btn btn-danger btn-sm py-0 px-1"
+                        style={{ fontSize: '0.7rem' }}
+                        onClick={() => deleteDocument(doc.id)}
+                      >
+                        🗑
+                      </button>
+                    </div>
                   ))
                   : <span className="text-muted">Aucun document</span>
                 }

@@ -66,6 +66,7 @@ function AdminDashBoard() {
               onClick={() => {
                 localStorage.removeItem("token")
                 localStorage.removeItem("role")
+                localStorage.removeItem("data")
                 window.location.href = "/"
               }}
             >

@@ -82,6 +82,7 @@ function Login() {
             <label className="form-label">Email</label>
             <input
               type="email"
+              name="email"  
               className="form-control"
               placeholder="votre@email.com"
               value={userEmail}
@@ -92,6 +93,7 @@ function Login() {
             <label className="form-label">Mot de passe</label>
             <input
               type="password"
+              name="password" 
               className="form-control"
               placeholder="••••••••"
               value={userPassword}
