@@ -23,7 +23,7 @@ function VehiculeList({ search }) {
   const [vehicules, setVehicules] = useState([])
 
   useEffect(() => {
-    fetch("https://m-motors-flask-backend.onrender.com:5001/vehicules")
+    fetch("https://m-motors-flask-backend.onrender.com/vehicules")
       .then(response => response.json())
       .then(data => setVehicules(data))
   }, [])

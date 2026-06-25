@@ -8,7 +8,7 @@ function VehiculeDetails() {
   const [vehiculesSelected, setVehiculesSelected] = useState(null)
 
   useEffect(() => {
-    fetch(`https://m-motors-flask-backend.onrender.com:5001/vehicule/${id}`)
+    fetch(`https://m-motors-flask-backend.onrender.com/vehicule/${id}`)
       .then(response => response.json())
       .then(data => setVehiculesSelected(data))
   }, [id])
