@@ -80,11 +80,16 @@ function Moncompte() {
       headers: { Authorization: "Bearer " + localStorage.getItem("token") },
       body: formData
     })
-      .then(res => res.json())
-      .then(() => {
-        alert("Document ajouté !")
-        fetchDossiers()
-      })
+      .then(res => res.json().then(data => ({ status: res.status, data })))
+      .then(({ status, data }) => {
+      if (status === 201) {
+       alert("Document ajouté !")
+       fetchDossiers()
+  } else {
+    alert(data.message || "Erreur lors de l'upload")
+  }
+  })
+      
   }
 
   const deleteDossier = (dossierId) => {
